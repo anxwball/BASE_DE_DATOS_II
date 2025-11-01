@@ -20,7 +20,6 @@ def login():
             return jsonify({"mensaje": "Usuario y contraseña requeridos"}), 400
 
         cursor = get_cursor()
-        # Consulta directa a usuarios (no necesitas vista para login)
         query = "SELECT id_usuario, nombre_usuario, rol_usuario FROM usuarios WHERE nombre_usuario = %s AND contrasena_usuario = %s"
         cursor.execute(query, (usuario, contrasena))
 
@@ -46,7 +45,7 @@ def login():
         if cursor:
             cursor.close()
 
-# Pantalla de menú de agenda de expedientes (USA LA VISTA)
+# Pantalla de menú de agenda de expedientes
 @app.route('/expedientes')
 def obtener_agenda_diaria():
     cursor = None
