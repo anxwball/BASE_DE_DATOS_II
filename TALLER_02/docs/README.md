@@ -55,12 +55,12 @@ La tabla `Login` registra cada intento de inicio de sesión con:
 
 El sistema de fidelización se compone de dos tablas:
 
-**Tabla Actividades:**
+**Tabla `Actividades`:**
 - Registra actividades corporativas realizadas cada 15 días
 - Atributos: fecha, tipo, descripción, puntos base
 - Estado de la actividad (programada, realizada, cancelada)
 
-**Tabla Participacion_Actividades:**
+**Tabla `Participacion_Actividades`:**
 - Vincula usuarios con actividades
 - Registra puntos otorgados por participación
 - Permite seguimiento histórico de participaciones
