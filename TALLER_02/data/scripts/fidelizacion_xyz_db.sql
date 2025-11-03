@@ -77,6 +77,42 @@ CREATE TABLE Participacion_Actividades (
 );
 
 -- =====================================================
+-- CREACIÓN DE FOREIGN KEYS (LLAVES FORÁNEAS)
+-- =====================================================
+
+-- FK: Usuarios -> Perfiles (Relación N:1)
+-- Un usuario tiene un perfil, un perfil puede tener muchos usuarios
+ALTER TABLE Usuarios
+    ADD CONSTRAINT fk_usuarios_perfiles
+    FOREIGN KEY (id_perfil) REFERENCES Perfiles(id_perfil)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE;
+
+-- FK: Login -> Usuarios (Relación N:1)
+-- Un login pertenece a un usuario, un usuario puede tener muchos logins
+ALTER TABLE Login
+    ADD CONSTRAINT fk_login_usuarios
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+-- FK: Participacion_Actividades -> Usuarios (Relación N:1)
+-- Una participación pertenece a un usuario, un usuario puede tener muchas participaciones
+ALTER TABLE Participacion_Actividades
+    ADD CONSTRAINT fk_participacion_usuarios
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+-- FK: Participacion_Actividades -> Actividades (Relación N:1)
+-- Una participación pertenece a una actividad, una actividad puede tener muchas participaciones
+ALTER TABLE Participacion_Actividades
+    ADD CONSTRAINT fk_participacion_actividades
+    FOREIGN KEY (id_actividad) REFERENCES Actividades(id_actividad)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+-- =====================================================
 -- INSERCIÓN DE DATOS DE SIMULACIÓN
 -- =====================================================
 
