@@ -21,7 +21,7 @@ Proveer una solución de base de datos que permita:
 
 ---
 
-## Arquitectura del Sistema
+## 🏗️ Arquitectura del Sistema
 
 ### Módulos Implementados
 
