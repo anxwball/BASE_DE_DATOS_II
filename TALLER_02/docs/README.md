@@ -279,7 +279,7 @@ TALLER_02/
 
 ![Imagen](./assets/diagrama.png "Diagrama ERD")
 
-```
+---
 
 ### Relaciones Clave
 - **Usuarios ↔ Perfiles**: Relación muchos a uno (N:1)
