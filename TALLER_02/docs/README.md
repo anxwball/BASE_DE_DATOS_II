@@ -278,6 +278,7 @@ TALLER_02/
 ### Modelo Conceptual
 
 ![Imagen](./assets/diagrama.png "Diagrama ERD")
+
 ```
 
 ### Relaciones Clave
