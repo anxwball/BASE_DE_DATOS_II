@@ -41,7 +41,7 @@ La tabla `Usuarios` almacena la información de cada colaborador con los siguien
 - Información laboral: cargo, salario, fecha_ingreso
 - Estado del usuario: activo/inactivo
 - Seguridad: contraseña (hash)
-- Relación: un perfil activo por usuario
+- Relación: un perfil activo por usuario (FK hacia Perfiles)
 
 #### 2. Sistema de Autenticación (Login)
 
@@ -49,7 +49,7 @@ La tabla `Login` registra cada intento de inicio de sesión con:
 - Fecha y hora exacta del intento
 - Estado del login (exitoso/fallido)
 - Información adicional: IP address, dispositivo
-- Relación directa con el usuario que intenta autenticarse
+- Relación directa con el usuario que intenta autenticarse (FK hacia Usuarios)
 
 #### 3. Módulo de Fidelización
 
@@ -61,9 +61,10 @@ El sistema de fidelización se compone de dos tablas:
 - Estado de la actividad (programada, realizada, cancelada)
 
 **Tabla `Participacion_Actividades`:**
-- Vincula usuarios con actividades
+- Vincula usuarios con actividades (tabla intermedia)
 - Registra puntos otorgados por participación
 - Permite seguimiento histórico de participaciones
+- Relaciones: FK hacia Usuarios y FK hacia Actividades
 
 #### 4. Perfiles de Usuarios
 
@@ -83,7 +84,7 @@ Para demostrar el funcionamiento completo del sistema, se implementó un conjunt
 -  **20 Usuarios** con diferentes roles y cargos
 -  **10 Perfiles** distintos (Administrador, Gerente, Supervisor, Analista, etc.)
 -  **100 Registros de autenticación** con estados exitosos y fallidos
--  **24 Actividades de fidelización** (2 por mes durante 12 meses)
+-  **24 Actividades de fidelización** (2 por mes durante el año 2025)
 -  **Más de 180 participaciones** de usuarios en actividades
 
 ### Tipos de Actividades Implementadas
@@ -95,7 +96,7 @@ Para demostrar el funcionamiento completo del sistema, se implementó un conjunt
 6. **Sociales**: Aniversarios, celebraciones, día de la familia
 
 ### Cálculo de Puntos de Fidelización
-El sistema calcula automáticamente los puntos acumulados por cada usuario durante 12 meses, permitiendo:
+El sistema calcula automáticamente los puntos acumulados por cada usuario durante el año 2025, permitiendo:
 - Evaluación del desempeño en fidelización
 - Identificación de colaboradores destacados
 - Análisis de participación por perfil
@@ -261,11 +262,15 @@ ORDER BY mes, estado_login;
 
 ![Imagen](./assets/diagrama.png "Diagrama ERD")
 
-### Relaciones Clave
-- **Usuarios ↔ Perfiles**: Relación muchos a uno (N:1)
-- **Usuarios ↔ Login**: Relación uno a muchos (1:N)
-- **Usuarios ↔ Participacion_Actividades**: Relación uno a muchos (1:N)
-- **Actividades ↔ Participacion_Actividades**: Relación uno a muchos (1:N)
+### Relaciones Clave (Foreign Keys)
+- **Usuarios → Perfiles**: Relación muchos a uno (N:1)
+  - `Usuarios.id_perfil` referencia `Perfiles.id_perfil`
+- **Login → Usuarios**: Relación muchos a uno (N:1)
+  - `Login.id_usuario` referencia `Usuarios.id_usuario`
+- **Participacion_Actividades → Usuarios**: Relación muchos a uno (N:1)
+  - `Participacion_Actividades.id_usuario` referencia `Usuarios.id_usuario`
+- **Participacion_Actividades → Actividades**: Relación muchos a uno (N:1)
+  - `Participacion_Actividades.id_actividad` referencia `Actividades.id_actividad`
 
 ---
 
@@ -304,6 +309,7 @@ ORDER BY mes, estado_login;
    - Separación clara de entidades (usuarios, perfiles, actividades)
    - Tabla intermedia para relaciones N:M (Participacion_Actividades)
    - Evitación de redundancia de datos
+   - Foreign Keys implementadas para garantizar integridad referencial
 
 3. **Seguridad y auditoría:**
    - Campo de contraseña preparado para hashing
@@ -318,7 +324,7 @@ ORDER BY mes, estado_login;
 
 3. **La documentación es crucial:** Un sistema bien documentado facilita el mantenimiento y escalabilidad.
 
-4. **Los datos de prueba revelan problemas:** La simulación de 12 meses de datos permitió detectar casos extremos.
+4. **Los datos de prueba revelan problemas:** La simulación de datos para el año 2025 permitió detectar casos extremos.
 
 5. **SQL permite análisis sofisticado:** Con funciones de ventana, subconsultas y vistas, SQL puede resolver problemas analíticos complejos.
 

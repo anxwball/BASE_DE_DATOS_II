@@ -1,3 +1,4 @@
+-- Active: 1759446392079@@127.0.0.1@3306@fidelizacion_xyz
 -- =====================================================
 -- TALLER 02: Sistema de Fidelización XYZ
 -- Base de Datos: Gestión de Usuarios y Fidelización
@@ -81,36 +82,20 @@ CREATE TABLE Participacion_Actividades (
 -- =====================================================
 
 -- FK: Usuarios -> Perfiles (Relación N:1)
--- Un usuario tiene un perfil, un perfil puede tener muchos usuarios
 ALTER TABLE Usuarios
-    ADD CONSTRAINT fk_usuarios_perfiles
-    FOREIGN KEY (id_perfil) REFERENCES Perfiles(id_perfil)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE;
+    ADD FOREIGN KEY (id_perfil) REFERENCES Perfiles(id_perfil);
 
 -- FK: Login -> Usuarios (Relación N:1)
--- Un login pertenece a un usuario, un usuario puede tener muchos logins
 ALTER TABLE Login
-    ADD CONSTRAINT fk_login_usuarios
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE;
+    ADD FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario);
 
 -- FK: Participacion_Actividades -> Usuarios (Relación N:1)
--- Una participación pertenece a un usuario, un usuario puede tener muchas participaciones
 ALTER TABLE Participacion_Actividades
-    ADD CONSTRAINT fk_participacion_usuarios
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE;
+    ADD FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario);
 
 -- FK: Participacion_Actividades -> Actividades (Relación N:1)
--- Una participación pertenece a una actividad, una actividad puede tener muchas participaciones
 ALTER TABLE Participacion_Actividades
-    ADD CONSTRAINT fk_participacion_actividades
-    FOREIGN KEY (id_actividad) REFERENCES Actividades(id_actividad)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE;
+    ADD FOREIGN KEY (id_actividad) REFERENCES Actividades(id_actividad);
 
 -- =====================================================
 -- INSERCIÓN DE DATOS DE SIMULACIÓN
@@ -118,16 +103,16 @@ ALTER TABLE Participacion_Actividades
 
 -- Insertar 10 Perfiles
 INSERT INTO Perfiles (nombre_perfil, descripcion_perfil, fecha_vigencia_perfil, encargado_perfil, estado) VALUES
-('Administrador', 'Acceso completo al sistema, gestión de usuarios y configuraciones', '2024-01-01', 'Gerencia General', 1),
-('Gerente', 'Gestión de departamentos y equipos de trabajo', '2024-01-01', 'Dirección Ejecutiva', 1),
-('Supervisor', 'Supervisión de equipos operativos y seguimiento de metas', '2024-01-01', 'Gerencia de Operaciones', 1),
-('Analista', 'Análisis de datos y generación de reportes', '2024-01-01', 'Gerencia de TI', 1),
-('Desarrollador', 'Desarrollo y mantenimiento de aplicaciones', '2024-01-01', 'Gerencia de Tecnología', 1),
-('Recursos Humanos', 'Gestión de personal y nómina', '2024-01-01', 'Gerencia de RRHH', 1),
-('Ventas', 'Gestión de clientes y ventas', '2024-01-01', 'Gerencia Comercial', 1),
-('Marketing', 'Campañas y estrategias de marketing', '2024-01-01', 'Gerencia de Marketing', 1),
-('Soporte Técnico', 'Atención y soporte a usuarios', '2024-01-01', 'Gerencia de TI', 1),
-('Operaciones', 'Ejecución de procesos operativos', '2024-01-01', 'Gerencia de Operaciones', 1);
+('Administrador', 'Acceso completo al sistema, gestión de usuarios y configuraciones', '2025-01-01', 'Gerencia General', 1),
+('Gerente', 'Gestión de departamentos y equipos de trabajo', '2025-01-01', 'Dirección Ejecutiva', 1),
+('Supervisor', 'Supervisión de equipos operativos y seguimiento de metas', '2025-01-01', 'Gerencia de Operaciones', 1),
+('Analista', 'Análisis de datos y generación de reportes', '2025-01-01', 'Gerencia de TI', 1),
+('Desarrollador', 'Desarrollo y mantenimiento de aplicaciones', '2025-01-01', 'Gerencia de Tecnología', 1),
+('Recursos Humanos', 'Gestión de personal y nómina', '2025-01-01', 'Gerencia de RRHH', 1),
+('Ventas', 'Gestión de clientes y ventas', '2025-01-01', 'Gerencia Comercial', 1),
+('Marketing', 'Campañas y estrategias de marketing', '2025-01-01', 'Gerencia de Marketing', 1),
+('Soporte Técnico', 'Atención y soporte a usuarios', '2025-01-01', 'Gerencia de TI', 1),
+('Operaciones', 'Ejecución de procesos operativos', '2025-01-01', 'Gerencia de Operaciones', 1);
 
 -- Insertar 20 Usuarios
 INSERT INTO Usuarios (nombre, apellido, cargo, salario, fecha_ingreso, estado, contrasena, id_perfil) VALUES
@@ -150,34 +135,34 @@ INSERT INTO Usuarios (nombre, apellido, cargo, salario, fecha_ingreso, estado, c
 ('Miguel', 'Reyes', 'Operador de Planta', 2500.00, '2023-05-01', 1, 'hash_pass_017', 10),
 ('Gabriela', 'Jiménez', 'Operadora de Planta', 2500.00, '2023-07-10', 1, 'hash_pass_018', 10),
 ('Pablo', 'Mendoza', 'Asistente Administrativo', 2600.00, '2023-09-15', 0, 'hash_pass_019', 10),
-('Valeria', 'Navarro', 'Asistente de Gerencia', 3100.00, '2024-01-10', 1, 'hash_pass_020', 2);
+('Valeria', 'Navarro', 'Asistente de Gerencia', 3100.00, '2025-01-10', 1, 'hash_pass_020', 2);
 
 -- Insertar 24 Actividades (2 por mes durante 12 meses)
 INSERT INTO Actividades (fecha_actividad, tipo_actividad, descripcion_actividad, puntos_base, estado) VALUES
-('2024-01-10', 'Capacitación', 'Taller de Liderazgo y Gestión de Equipos', 50.00, 1),
-('2024-01-25', 'Deportiva', 'Torneo de Fútbol Interáreas', 30.00, 1),
-('2024-02-08', 'Voluntariado', 'Jornada de Limpieza Ambiental', 40.00, 1),
-('2024-02-22', 'Cultural', 'Día de la Creatividad e Innovación', 35.00, 1),
-('2024-03-12', 'Capacitación', 'Curso de Excel Avanzado', 45.00, 1),
-('2024-03-28', 'Social', 'Celebración de Aniversario de la Empresa', 25.00, 1),
-('2024-04-15', 'Bienestar', 'Taller de Manejo de Estrés', 40.00, 1),
-('2024-04-29', 'Deportiva', 'Caminata Ecológica', 30.00, 1),
-('2024-05-10', 'Capacitación', 'Seminario de Atención al Cliente', 50.00, 1),
-('2024-05-24', 'Cultural', 'Concurso de Talentos', 35.00, 1),
-('2024-06-12', 'Voluntariado', 'Donación de Sangre', 45.00, 1),
-('2024-06-26', 'Deportiva', 'Torneo de Volleyball', 30.00, 1),
-('2024-07-15', 'Capacitación', 'Taller de Seguridad Industrial', 50.00, 1),
-('2024-07-29', 'Social', 'Día de la Familia', 25.00, 1),
-('2024-08-10', 'Bienestar', 'Jornada de Salud y Bienestar', 40.00, 1),
-('2024-08-24', 'Cultural', 'Festival Gastronómico', 35.00, 1),
-('2024-09-12', 'Capacitación', 'Curso de Trabajo en Equipo', 45.00, 1),
-('2024-09-28', 'Deportiva', 'Maratón Recreativa', 30.00, 1),
-('2024-10-15', 'Voluntariado', 'Visita a Hogar de Ancianos', 40.00, 1),
-('2024-10-29', 'Cultural', 'Concurso de Disfraces Halloween', 25.00, 1),
-('2024-11-10', 'Capacitación', 'Taller de Comunicación Efectiva', 50.00, 1),
-('2024-11-24', 'Social', 'Celebración de Fin de Año', 30.00, 1),
-('2024-12-12', 'Bienestar', 'Yoga y Meditación', 40.00, 1),
-('2024-12-28', 'Cultural', 'Intercambio de Regalos Navideños', 35.00, 1);
+('2025-01-10', 'Capacitación', 'Taller de Liderazgo y Gestión de Equipos', 50.00, 1),
+('2025-01-25', 'Deportiva', 'Torneo de Fútbol Interáreas', 30.00, 1),
+('2025-02-08', 'Voluntariado', 'Jornada de Limpieza Ambiental', 40.00, 1),
+('2025-02-22', 'Cultural', 'Día de la Creatividad e Innovación', 35.00, 1),
+('2025-03-12', 'Capacitación', 'Curso de Excel Avanzado', 45.00, 1),
+('2025-03-28', 'Social', 'Celebración de Aniversario de la Empresa', 25.00, 1),
+('2025-04-15', 'Bienestar', 'Taller de Manejo de Estrés', 40.00, 1),
+('2025-04-29', 'Deportiva', 'Caminata Ecológica', 30.00, 1),
+('2025-05-10', 'Capacitación', 'Seminario de Atención al Cliente', 50.00, 1),
+('2025-05-24', 'Cultural', 'Concurso de Talentos', 35.00, 1),
+('2025-06-12', 'Voluntariado', 'Donación de Sangre', 45.00, 1),
+('2025-06-26', 'Deportiva', 'Torneo de Volleyball', 30.00, 1),
+('2025-07-15', 'Capacitación', 'Taller de Seguridad Industrial', 50.00, 1),
+('2025-07-29', 'Social', 'Día de la Familia', 25.00, 1),
+('2025-08-10', 'Bienestar', 'Jornada de Salud y Bienestar', 40.00, 1),
+('2025-08-24', 'Cultural', 'Festival Gastronómico', 35.00, 1),
+('2025-09-12', 'Capacitación', 'Curso de Trabajo en Equipo', 45.00, 1),
+('2025-09-28', 'Deportiva', 'Maratón Recreativa', 30.00, 1),
+('2025-10-15', 'Voluntariado', 'Visita a Hogar de Ancianos', 40.00, 1),
+('2025-10-29', 'Cultural', 'Concurso de Disfraces Halloween', 25.00, 1),
+('2025-11-10', 'Capacitación', 'Taller de Comunicación Efectiva', 50.00, 1),
+('2025-11-24', 'Social', 'Celebración de Fin de Año', 30.00, 1),
+('2025-12-12', 'Bienestar', 'Yoga y Meditación', 40.00, 1),
+('2025-12-28', 'Cultural', 'Intercambio de Regalos Navideños', 35.00, 1);
 
 -- Insertar Participaciones en Actividades
 INSERT INTO Participacion_Actividades (id_usuario, id_actividad, puntos_otorgados, observaciones) VALUES
@@ -229,108 +214,108 @@ INSERT INTO Participacion_Actividades (id_usuario, id_actividad, puntos_otorgado
 
 -- Insertar 100 Registros de Login
 INSERT INTO Login (id_usuario, fecha_hora_login, estado_login, ip_address, dispositivo) VALUES
-(1, '2024-01-02 08:15:23', 1, '192.168.1.10', 'Windows PC'),
-(1, '2024-01-02 08:16:45', 0, '192.168.1.10', 'Windows PC'),
-(2, '2024-01-02 08:30:12', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-01-02 09:00:34', 1, '192.168.1.20', 'Windows PC'),
-(4, '2024-01-03 08:45:22', 1, '192.168.1.25', 'iPad'),
-(5, '2024-01-03 09:15:11', 1, '192.168.1.30', 'Windows PC'),
-(1, '2024-01-04 08:10:05', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-01-04 08:25:33', 1, '192.168.1.15', 'MacBook Pro'),
-(6, '2024-01-05 08:55:44', 1, '192.168.1.35', 'Linux Laptop'),
-(7, '2024-01-05 09:20:15', 1, '192.168.1.40', 'Windows PC'),
-(8, '2024-02-01 08:30:22', 1, '192.168.1.45', 'MacBook Air'),
-(9, '2024-02-01 08:35:44', 0, '192.168.1.50', 'Windows PC'),
-(9, '2024-02-01 08:37:12', 1, '192.168.1.50', 'Windows PC'),
-(10, '2024-02-02 08:40:33', 1, '192.168.1.55', 'Windows PC'),
-(1, '2024-02-05 08:12:45', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-02-05 08:28:11', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-02-06 09:05:22', 1, '192.168.1.20', 'Windows PC'),
-(11, '2024-02-07 08:50:33', 1, '192.168.1.60', 'iPhone'),
-(12, '2024-02-08 09:10:44', 1, '192.168.1.65', 'Android'),
-(13, '2024-02-09 08:45:55', 1, '192.168.1.70', 'Windows PC'),
-(14, '2024-03-01 08:35:12', 1, '192.168.1.75', 'MacBook Pro'),
-(15, '2024-03-01 09:00:23', 1, '192.168.1.80', 'Windows PC'),
-(1, '2024-03-04 08:15:34', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-03-04 08:30:45', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-03-05 09:02:11', 0, '192.168.1.20', 'Windows PC'),
-(3, '2024-03-05 09:03:22', 1, '192.168.1.20', 'Windows PC'),
-(16, '2024-03-06 08:55:33', 1, '192.168.1.85', 'Windows PC'),
-(17, '2024-03-07 09:15:44', 1, '192.168.1.90', 'Linux Laptop'),
-(18, '2024-03-08 08:40:55', 1, '192.168.1.95', 'Windows PC'),
-(4, '2024-03-10 08:50:12', 1, '192.168.1.25', 'iPad'),
-(5, '2024-04-01 09:10:23', 1, '192.168.1.30', 'Windows PC'),
-(6, '2024-04-01 08:58:34', 1, '192.168.1.35', 'Linux Laptop'),
-(7, '2024-04-02 09:25:45', 1, '192.168.1.40', 'Windows PC'),
-(8, '2024-04-03 08:32:11', 1, '192.168.1.45', 'MacBook Air'),
-(1, '2024-04-05 08:18:22', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-04-05 08:32:33', 1, '192.168.1.15', 'MacBook Pro'),
-(9, '2024-04-08 08:40:44', 0, '192.168.1.50', 'Windows PC'),
-(9, '2024-04-08 08:42:55', 1, '192.168.1.50', 'Windows PC'),
-(10, '2024-04-10 08:45:12', 1, '192.168.1.55', 'Windows PC'),
-(11, '2024-04-12 08:52:23', 1, '192.168.1.60', 'iPhone'),
-(12, '2024-05-02 09:12:34', 1, '192.168.1.65', 'Android'),
-(13, '2024-05-02 08:48:45', 1, '192.168.1.70', 'Windows PC'),
-(14, '2024-05-03 08:38:11', 1, '192.168.1.75', 'MacBook Pro'),
-(1, '2024-05-06 08:20:22', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-05-06 08:35:33', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-05-07 09:08:44', 1, '192.168.1.20', 'Windows PC'),
-(15, '2024-05-08 09:05:55', 1, '192.168.1.80', 'Windows PC'),
-(16, '2024-05-09 08:58:12', 1, '192.168.1.85', 'Windows PC'),
-(4, '2024-05-12 08:52:23', 1, '192.168.1.25', 'iPad'),
-(5, '2024-05-14 09:12:34', 1, '192.168.1.30', 'Windows PC'),
-(6, '2024-06-03 09:00:45', 1, '192.168.1.35', 'Linux Laptop'),
-(7, '2024-06-03 09:28:11', 1, '192.168.1.40', 'Windows PC'),
-(8, '2024-06-04 08:35:22', 1, '192.168.1.45', 'MacBook Air'),
-(1, '2024-06-05 08:22:33', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-06-05 08:38:44', 1, '192.168.1.15', 'MacBook Pro'),
-(17, '2024-06-06 09:18:55', 1, '192.168.1.90', 'Linux Laptop'),
-(18, '2024-06-07 08:42:12', 0, '192.168.1.95', 'Windows PC'),
-(18, '2024-06-07 08:43:23', 1, '192.168.1.95', 'Windows PC'),
-(9, '2024-06-10 08:45:34', 1, '192.168.1.50', 'Windows PC'),
-(10, '2024-06-12 08:48:45', 1, '192.168.1.55', 'Windows PC'),
-(11, '2024-07-01 08:55:11', 1, '192.168.1.60', 'iPhone'),
-(12, '2024-07-02 09:15:22', 1, '192.168.1.65', 'Android'),
-(13, '2024-07-03 08:50:33', 1, '192.168.1.70', 'Windows PC'),
-(1, '2024-07-05 08:25:44', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-07-05 08:40:55', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-07-08 09:10:12', 1, '192.168.1.20', 'Windows PC'),
-(14, '2024-07-10 08:40:23', 1, '192.168.1.75', 'MacBook Pro'),
-(4, '2024-07-12 08:55:34', 1, '192.168.1.25', 'iPad'),
-(5, '2024-07-15 09:15:45', 1, '192.168.1.30', 'Windows PC'),
-(15, '2024-07-18 09:08:11', 1, '192.168.1.80', 'Windows PC'),
-(6, '2024-08-02 09:02:22', 1, '192.168.1.35', 'Linux Laptop'),
-(7, '2024-08-05 09:30:33', 1, '192.168.1.40', 'Windows PC'),
-(8, '2024-08-08 08:38:44', 1, '192.168.1.45', 'MacBook Air'),
-(1, '2024-08-12 08:28:55', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-08-12 08:42:12', 1, '192.168.1.15', 'MacBook Pro'),
-(16, '2024-08-15 09:00:23', 1, '192.168.1.85', 'Windows PC'),
-(9, '2024-08-18 08:48:34', 1, '192.168.1.50', 'Windows PC'),
-(10, '2024-08-20 08:50:45', 0, '192.168.1.55', 'Windows PC'),
-(10, '2024-08-20 08:52:11', 1, '192.168.1.55', 'Windows PC'),
-(11, '2024-08-22 08:58:22', 1, '192.168.1.60', 'iPhone'),
-(12, '2024-09-03 09:18:33', 1, '192.168.1.65', 'Android'),
-(13, '2024-09-05 08:52:44', 1, '192.168.1.70', 'Windows PC'),
-(1, '2024-09-09 08:30:55', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-09-09 08:45:12', 1, '192.168.1.15', 'MacBook Pro'),
-(3, '2024-09-10 09:12:23', 1, '192.168.1.20', 'Windows PC'),
-(17, '2024-09-12 09:20:34', 1, '192.168.1.90', 'Linux Laptop'),
-(4, '2024-09-15 08:58:45', 1, '192.168.1.25', 'iPad'),
-(14, '2024-09-18 08:42:11', 1, '192.168.1.75', 'MacBook Pro'),
-(5, '2024-09-20 09:18:22', 1, '192.168.1.30', 'Windows PC'),
-(20, '2024-09-25 08:30:33', 1, '192.168.1.100', 'Windows PC'),
-(6, '2024-10-02 09:05:44', 1, '192.168.1.35', 'Linux Laptop'),
-(7, '2024-10-05 09:32:55', 1, '192.168.1.40', 'Windows PC'),
-(8, '2024-10-08 08:40:12', 1, '192.168.1.45', 'MacBook Air'),
-(1, '2024-10-10 08:32:23', 1, '192.168.1.10', 'Windows PC'),
-(2, '2024-10-10 08:48:34', 1, '192.168.1.15', 'MacBook Pro'),
-(15, '2024-10-12 09:10:45', 1, '192.168.1.80', 'Windows PC'),
-(18, '2024-10-15 08:45:11', 1, '192.168.1.95', 'Windows PC'),
-(9, '2024-10-18 08:50:22', 1, '192.168.1.50', 'Windows PC'),
-(20, '2024-10-20 08:35:33', 1, '192.168.1.100', 'Windows PC'),
-(10, '2024-10-22 08:52:44', 1, '192.168.1.55', 'Windows PC'),
-(11, '2024-11-01 09:00:55', 1, '192.168.1.60', 'iPhone'),
-(12, '2024-11-01 09:20:12', 1, '192.168.1.65', 'Android');
+(1, '2025-01-02 08:15:23', 1, '192.168.1.10', 'Windows PC'),
+(1, '2025-01-02 08:16:45', 0, '192.168.1.10', 'Windows PC'),
+(2, '2025-01-02 08:30:12', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-01-02 09:00:34', 1, '192.168.1.20', 'Windows PC'),
+(4, '2025-01-03 08:45:22', 1, '192.168.1.25', 'iPad'),
+(5, '2025-01-03 09:15:11', 1, '192.168.1.30', 'Windows PC'),
+(1, '2025-01-04 08:10:05', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-01-04 08:25:33', 1, '192.168.1.15', 'MacBook Pro'),
+(6, '2025-01-05 08:55:44', 1, '192.168.1.35', 'Linux Laptop'),
+(7, '2025-01-05 09:20:15', 1, '192.168.1.40', 'Windows PC'),
+(8, '2025-02-01 08:30:22', 1, '192.168.1.45', 'MacBook Air'),
+(9, '2025-02-01 08:35:44', 0, '192.168.1.50', 'Windows PC'),
+(9, '2025-02-01 08:37:12', 1, '192.168.1.50', 'Windows PC'),
+(10, '2025-02-02 08:40:33', 1, '192.168.1.55', 'Windows PC'),
+(1, '2025-02-05 08:12:45', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-02-05 08:28:11', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-02-06 09:05:22', 1, '192.168.1.20', 'Windows PC'),
+(11, '2025-02-07 08:50:33', 1, '192.168.1.60', 'iPhone'),
+(12, '2025-02-08 09:10:44', 1, '192.168.1.65', 'Android'),
+(13, '2025-02-09 08:45:55', 1, '192.168.1.70', 'Windows PC'),
+(14, '2025-03-01 08:35:12', 1, '192.168.1.75', 'MacBook Pro'),
+(15, '2025-03-01 09:00:23', 1, '192.168.1.80', 'Windows PC'),
+(1, '2025-03-04 08:15:34', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-03-04 08:30:45', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-03-05 09:02:11', 0, '192.168.1.20', 'Windows PC'),
+(3, '2025-03-05 09:03:22', 1, '192.168.1.20', 'Windows PC'),
+(16, '2025-03-06 08:55:33', 1, '192.168.1.85', 'Windows PC'),
+(17, '2025-03-07 09:15:44', 1, '192.168.1.90', 'Linux Laptop'),
+(18, '2025-03-08 08:40:55', 1, '192.168.1.95', 'Windows PC'),
+(4, '2025-03-10 08:50:12', 1, '192.168.1.25', 'iPad'),
+(5, '2025-04-01 09:10:23', 1, '192.168.1.30', 'Windows PC'),
+(6, '2025-04-01 08:58:34', 1, '192.168.1.35', 'Linux Laptop'),
+(7, '2025-04-02 09:25:45', 1, '192.168.1.40', 'Windows PC'),
+(8, '2025-04-03 08:32:11', 1, '192.168.1.45', 'MacBook Air'),
+(1, '2025-04-05 08:18:22', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-04-05 08:32:33', 1, '192.168.1.15', 'MacBook Pro'),
+(9, '2025-04-08 08:40:44', 0, '192.168.1.50', 'Windows PC'),
+(9, '2025-04-08 08:42:55', 1, '192.168.1.50', 'Windows PC'),
+(10, '2025-04-10 08:45:12', 1, '192.168.1.55', 'Windows PC'),
+(11, '2025-04-12 08:52:23', 1, '192.168.1.60', 'iPhone'),
+(12, '2025-05-02 09:12:34', 1, '192.168.1.65', 'Android'),
+(13, '2025-05-02 08:48:45', 1, '192.168.1.70', 'Windows PC'),
+(14, '2025-05-03 08:38:11', 1, '192.168.1.75', 'MacBook Pro'),
+(1, '2025-05-06 08:20:22', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-05-06 08:35:33', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-05-07 09:08:44', 1, '192.168.1.20', 'Windows PC'),
+(15, '2025-05-08 09:05:55', 1, '192.168.1.80', 'Windows PC'),
+(16, '2025-05-09 08:58:12', 1, '192.168.1.85', 'Windows PC'),
+(4, '2025-05-12 08:52:23', 1, '192.168.1.25', 'iPad'),
+(5, '2025-05-14 09:12:34', 1, '192.168.1.30', 'Windows PC'),
+(6, '2025-06-03 09:00:45', 1, '192.168.1.35', 'Linux Laptop'),
+(7, '2025-06-03 09:28:11', 1, '192.168.1.40', 'Windows PC'),
+(8, '2025-06-04 08:35:22', 1, '192.168.1.45', 'MacBook Air'),
+(1, '2025-06-05 08:22:33', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-06-05 08:38:44', 1, '192.168.1.15', 'MacBook Pro'),
+(17, '2025-06-06 09:18:55', 1, '192.168.1.90', 'Linux Laptop'),
+(18, '2025-06-07 08:42:12', 0, '192.168.1.95', 'Windows PC'),
+(18, '2025-06-07 08:43:23', 1, '192.168.1.95', 'Windows PC'),
+(9, '2025-06-10 08:45:34', 1, '192.168.1.50', 'Windows PC'),
+(10, '2025-06-12 08:48:45', 1, '192.168.1.55', 'Windows PC'),
+(11, '2025-07-01 08:55:11', 1, '192.168.1.60', 'iPhone'),
+(12, '2025-07-02 09:15:22', 1, '192.168.1.65', 'Android'),
+(13, '2025-07-03 08:50:33', 1, '192.168.1.70', 'Windows PC'),
+(1, '2025-07-05 08:25:44', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-07-05 08:40:55', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-07-08 09:10:12', 1, '192.168.1.20', 'Windows PC'),
+(14, '2025-07-10 08:40:23', 1, '192.168.1.75', 'MacBook Pro'),
+(4, '2025-07-12 08:55:34', 1, '192.168.1.25', 'iPad'),
+(5, '2025-07-15 09:15:45', 1, '192.168.1.30', 'Windows PC'),
+(15, '2025-07-18 09:08:11', 1, '192.168.1.80', 'Windows PC'),
+(6, '2025-08-02 09:02:22', 1, '192.168.1.35', 'Linux Laptop'),
+(7, '2025-08-05 09:30:33', 1, '192.168.1.40', 'Windows PC'),
+(8, '2025-08-08 08:38:44', 1, '192.168.1.45', 'MacBook Air'),
+(1, '2025-08-12 08:28:55', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-08-12 08:42:12', 1, '192.168.1.15', 'MacBook Pro'),
+(16, '2025-08-15 09:00:23', 1, '192.168.1.85', 'Windows PC'),
+(9, '2025-08-18 08:48:34', 1, '192.168.1.50', 'Windows PC'),
+(10, '2025-08-20 08:50:45', 0, '192.168.1.55', 'Windows PC'),
+(10, '2025-08-20 08:52:11', 1, '192.168.1.55', 'Windows PC'),
+(11, '2025-08-22 08:58:22', 1, '192.168.1.60', 'iPhone'),
+(12, '2025-09-03 09:18:33', 1, '192.168.1.65', 'Android'),
+(13, '2025-09-05 08:52:44', 1, '192.168.1.70', 'Windows PC'),
+(1, '2025-09-09 08:30:55', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-09-09 08:45:12', 1, '192.168.1.15', 'MacBook Pro'),
+(3, '2025-09-10 09:12:23', 1, '192.168.1.20', 'Windows PC'),
+(17, '2025-09-12 09:20:34', 1, '192.168.1.90', 'Linux Laptop'),
+(4, '2025-09-15 08:58:45', 1, '192.168.1.25', 'iPad'),
+(14, '2025-09-18 08:42:11', 1, '192.168.1.75', 'MacBook Pro'),
+(5, '2025-09-20 09:18:22', 1, '192.168.1.30', 'Windows PC'),
+(20, '2025-09-25 08:30:33', 1, '192.168.1.100', 'Windows PC'),
+(6, '2025-10-02 09:05:44', 1, '192.168.1.35', 'Linux Laptop'),
+(7, '2025-10-05 09:32:55', 1, '192.168.1.40', 'Windows PC'),
+(8, '2025-10-08 08:40:12', 1, '192.168.1.45', 'MacBook Air'),
+(1, '2025-10-10 08:32:23', 1, '192.168.1.10', 'Windows PC'),
+(2, '2025-10-10 08:48:34', 1, '192.168.1.15', 'MacBook Pro'),
+(15, '2025-10-12 09:10:45', 1, '192.168.1.80', 'Windows PC'),
+(18, '2025-10-15 08:45:11', 1, '192.168.1.95', 'Windows PC'),
+(9, '2025-10-18 08:50:22', 1, '192.168.1.50', 'Windows PC'),
+(20, '2025-10-20 08:35:33', 1, '192.168.1.100', 'Windows PC'),
+(10, '2025-10-22 08:52:44', 1, '192.168.1.55', 'Windows PC'),
+(11, '2025-11-01 09:00:55', 1, '192.168.1.60', 'iPhone'),
+(12, '2025-11-01 09:20:12', 1, '192.168.1.65', 'Android');
 
 -- =====================================================
 -- CREACIÓN DE VISTAS
