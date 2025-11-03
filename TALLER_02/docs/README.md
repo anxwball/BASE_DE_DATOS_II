@@ -21,7 +21,7 @@ Proveer una solución de base de datos que permita:
 
 ---
 
-## Arquitectura del Sistema
+## 🏗️ Arquitectura del Sistema
 
 ### Módulos Implementados
 
@@ -55,12 +55,12 @@ La tabla `Login` registra cada intento de inicio de sesión con:
 
 El sistema de fidelización se compone de dos tablas:
 
-**Tabla Actividades:**
+**Tabla `Actividades`:**
 - Registra actividades corporativas realizadas cada 15 días
 - Atributos: fecha, tipo, descripción, puntos base
 - Estado de la actividad (programada, realizada, cancelada)
 
-**Tabla Participacion_Actividades:**
+**Tabla `Participacion_Actividades`:**
 - Vincula usuarios con actividades
 - Registra puntos otorgados por participación
 - Permite seguimiento histórico de participaciones
@@ -215,24 +215,6 @@ ORDER BY mes, estado_login;
 ```
 
 **Propósito:** Monitorear la seguridad del sistema y detectar patrones de intentos fallidos.
-
----
-
-## 🗂️ Estructura del Proyecto
-
-```
-TALLER_02/
-│
-├── data/
-│   └── scripts/
-│       └── fidelizacion_xyz_db.sql    # Script completo de la base de datos
-│
-├── docs/
-│   ├── README.md                      # Esta documentación
-│   └── assets/                        # Recursos adicionales (diagramas, imágenes)
-│
-└── [Diagrama ERD en formato DBML]     # Modelo Entidad-Relación
-```
 
 ---
 
