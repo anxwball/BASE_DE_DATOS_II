@@ -4,10 +4,10 @@ CREATE DATABASE sistema_expedientes;
 USE sistema_expedientes;
 
 -- ==========================================
--- TABLAS BASE (sin dependencias)
+-- TABLAS BASE
 -- ==========================================
 
--- Tabla de usuarios (con login incluido)
+-- Tabla de usuarios
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(100) NOT NULL,
