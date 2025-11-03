@@ -218,24 +218,6 @@ ORDER BY mes, estado_login;
 
 ---
 
-## 🗂️ Estructura del Proyecto
-
-```
-TALLER_02/
-│
-├── data/
-│   └── scripts/
-│       └── fidelizacion_xyz_db.sql    # Script completo de la base de datos
-│
-├── docs/
-│   ├── README.md                      # Esta documentación
-│   └── assets/                        # Recursos adicionales (diagramas, imágenes)
-│
-└── [Diagrama ERD en formato DBML]     # Modelo Entidad-Relación
-```
-
----
-
 ## 🚀 Instalación y Uso
 
 ### Requisitos Previos
