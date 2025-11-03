@@ -21,7 +21,7 @@ Proveer una solución de base de datos que permita:
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
 ### Módulos Implementados
 
@@ -80,11 +80,11 @@ La tabla `Perfiles` gestiona roles organizacionales:
 Para demostrar el funcionamiento completo del sistema, se implementó un conjunto robusto de datos de prueba:
 
 ### Volumen de Datos
-- ✅ **20 Usuarios** con diferentes roles y cargos
-- ✅ **10 Perfiles** distintos (Administrador, Gerente, Supervisor, Analista, etc.)
-- ✅ **100 Registros de autenticación** con estados exitosos y fallidos
-- ✅ **24 Actividades de fidelización** (2 por mes durante 12 meses)
-- ✅ **Más de 180 participaciones** de usuarios en actividades
+-  **20 Usuarios** con diferentes roles y cargos
+-  **10 Perfiles** distintos (Administrador, Gerente, Supervisor, Analista, etc.)
+-  **100 Registros de autenticación** con estados exitosos y fallidos
+-  **24 Actividades de fidelización** (2 por mes durante 12 meses)
+-  **Más de 180 participaciones** de usuarios en actividades
 
 ### Tipos de Actividades Implementadas
 1. **Capacitación**: Talleres de liderazgo, Excel, seguridad, comunicación
