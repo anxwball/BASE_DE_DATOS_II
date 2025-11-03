@@ -277,58 +277,7 @@ TALLER_02/
 
 ### Modelo Conceptual
 
-```dbml
-Table Perfiles {
-  id_perfil int [pk, increment]
-  nombre_perfil varchar(50)
-  descripcion_perfil varchar(500)
-  fecha_vigencia_perfil date
-  encargado_perfil varchar(100)
-  estado tinyint
-  fecha_creacion datetime
-}
-
-Table Usuarios {
-  id_usuario int [pk, increment]
-  nombre varchar(50)
-  apellido varchar(50)
-  cargo varchar(80)
-  salario decimal(10,2)
-  fecha_ingreso date
-  estado tinyint
-  contrasena varchar(255)
-  id_perfil int [ref: > Perfiles.id_perfil]
-  fecha_creacion datetime
-  fecha_actualizacion datetime
-}
-
-Table Login {
-  id_login bigint [pk, increment]
-  id_usuario int [ref: > Usuarios.id_usuario]
-  fecha_hora_login datetime
-  estado_login tinyint
-  ip_address varchar(45)
-  dispositivo varchar(100)
-}
-
-Table Actividades {
-  id_actividad int [pk, increment]
-  fecha_actividad date
-  tipo_actividad varchar(50)
-  descripcion_actividad varchar(500)
-  puntos_base decimal(6,2)
-  estado tinyint
-  fecha_creacion datetime
-}
-
-Table Participacion_Actividades {
-  id_participacion int [pk, increment]
-  id_usuario int [ref: > Usuarios.id_usuario]
-  id_actividad int [ref: > Actividades.id_actividad]
-  puntos_otorgados decimal(6,2)
-  fecha_participacion datetime
-  observaciones varchar(500)
-}
+![Imagen](./assets/diagrama.png "Diagrama ERD")
 ```
 
 ### Relaciones Clave
