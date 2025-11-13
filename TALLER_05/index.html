@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores SPA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Proveedores</h1>
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Proveedor</th>
+                <th>Status</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td><input type="text" id="nuevoProveedor" placeholder="Proveedor"></td>
+                <td>
+                    <select id="nuevoStatus" title="Status del proveedor">
+                        <option value="">Status</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+                <td><input type="text" id="nuevaCiudad" placeholder="Ciudad"></td>
+                <td><button onclick="agregarProveedor()">Agregar</button></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>

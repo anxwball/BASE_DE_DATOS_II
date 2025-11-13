@@ -1,0 +1,19 @@
+# Entorno virtual de Python
+venv/
+ENV/
+env/
+.venv/
+
+# Archivos de configuración sensibles
+.env
+
+# Archivos y carpetas de caché de Python
+__pycache__/
+*.pyc
+
+# Archivos de base de datos temporales
+*.db
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
